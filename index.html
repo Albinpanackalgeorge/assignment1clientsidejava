@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Course Marks Average</title>
+</head>
+<body>
+  <script>
+    // Initialize variables
+    let courseMarks = [];
+    let total = 0;
+
+    // Get the number of courses from the user
+    let numOfCourses = parseInt(prompt("Enter the number of courses:"));
+
+    // Validate the number of courses
+    if (isNaN(numOfCourses) || numOfCourses <= 0) {
+      document.write("<p>Please enter a valid positive number for the number of courses.</p>");
+    } else {
+      // Loop to get marks for each course
+      for (let i = 0; i < numOfCourses; i++) {
+        let mark = parseFloat(prompt(`Enter the mark for course ${i + 1}:`));
+
+        // Validate the input mark
+        if (mark < 0 || mark > 100 || isNaN(mark)) {
+          alert("Please enter a valid mark between 0 and 100.");
+          i--; // Decrement the counter to re-enter the mark
+          continue;
+        }
+
+        // Add the mark to the array and update the total
+        courseMarks.push(mark);
+        total += mark;
+      }
+
+      // Calculate the average and round to 2 decimal points
+      let average = parseFloat((total / courseMarks.length).toFixed(2));
+
+      // Display all course marks
+      document.write("<h3>Course Marks:</h3>");
+      courseMarks.forEach((mark, index) => {
+        document.write(`Course ${index + 1}: ${mark}<br>`);
+      });
+
+      // Display the average and grade
+      document.write("<h3>Final Result:</h3>");
+      document.write(`Your final average is ${average}. `);
+
+      // Determine the grade using conditions
+      if (average >= 90 && average <= 100) {
+        document.write("Your grade is A+.");
+      } else if (average >= 80 && average <= 89) {
+        document.write("Your grade is B.");
+      } else if (average >= 70 && average <= 79) {
+        document.write("Your grade is C.");
+      } else if (average >= 60 && average <= 69) {
+        document.write("Your grade is D.");
+      } else if (average < 60) {
+        document.write("Your grade is F.");
+      } else {
+        document.write("Sorry, all the marks have to be from minimum 0 to maximum 100!");
+      }
+    }
+  </script>
+</body>
+</html>
